@@ -1,0 +1,15 @@
+<resources>
+
+    <string name="tool_app_name">Toolkit</string>
+    <string name="tool_kit">Toolkit</string>
+    <string name="tool_view_record">View Record</string>
+    <string name="tool_title">Tools</string>
+    <string name="tool_title_previous">Previous</string>
+    <string name="tool_title_clear">Clear</string>
+    <string name="tool_title_record_list">Record List</string>
+    <string name="tool_title_record_detail">Record Detail</string>
+    <string name="tool_title_record_share">Share</string>
+    <string name="loading">Loading, please wait…</string>
+    <string name="loading_more">Loading more, please wait…</string>
+
+</resources>

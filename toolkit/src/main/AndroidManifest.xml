@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.william.toolkit">
+
+    <!--需要的权限-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application>
+
+        <activity
+            android:name="com.william.toolkit.activity.ToolkitPanelActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/tool_theme_activity" />
+
+        <activity
+            android:name="com.william.toolkit.activity.RecordListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.william.toolkit.activity.RecordDetailActivity"
+            android:screenOrientation="portrait" />
+    </application>
+</manifest>

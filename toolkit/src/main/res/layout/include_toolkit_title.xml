@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_tool_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <TextView
+        android:id="@+id/tv_previous"
+        style="@style/tool_sp16"
+        android:padding="15dp"
+        android:text="@string/tool_title_previous"
+        android:textColor="@color/tool_color_646464"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_toolTitle"
+        style="@style/tool_sp20"
+        app:layout_constraintBottom_toBottomOf="@+id/guide_tool_line"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/tool_title_record_list" />
+
+    <TextView
+        android:id="@+id/tv_toolRight"
+        style="@style/tool_sp16"
+        android:padding="15dp"
+        android:textColor="@color/tool_color_646464"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/tool_title_clear" />
+</androidx.constraintlayout.widget.ConstraintLayout>

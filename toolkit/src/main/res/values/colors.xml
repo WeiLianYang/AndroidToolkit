@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="tool_color_0CBC04">#0CBC04</color>
+    <color name="tool_color_transparent">#00000000</color>
+    <color name="tool_color_ffffff">#ffffff</color>
+    <color name="tool_color_646464">#646464</color>
+    <color name="tool_color_232323">#232323</color>
+    <color name="tool_color_80ffffff">#80ffffff</color>
+
+</resources>

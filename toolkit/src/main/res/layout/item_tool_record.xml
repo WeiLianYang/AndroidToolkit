@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_tool_icon"
+        style="@style/tool_sp14"
+        android:text="✅"
+        android:layout_marginTop="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/tv_tool_url"
+        style="@style/tool_sp16"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:maxLines="3"
+        app:layout_constraintLeft_toRightOf="@+id/tv_tool_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="https://developer.android.com/" />
+
+    <TextView
+        android:id="@+id/tv_tool_time"
+        style="@style/tool_sp12"
+        android:textColor="@color/tool_color_646464"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_tool_url"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tool_url"
+        tools:text="12:10:58" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
