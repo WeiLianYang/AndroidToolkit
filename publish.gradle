@@ -1,0 +1,69 @@
+// 发布到mavenCentral的配置
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+def PUBLISH_GROUP_ID = 'io.github.LuckyYangChen'
+def PUBLISH_VERSION = android.defaultConfig.versionName
+
+def ossrhUsername = ""
+def ossrhPassword = ""
+
+afterEvaluate { project ->
+
+    signing {
+        required { gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+                repository(url: "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                snapshotRepository(url: "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                }
+
+                pom.groupId = PUBLISH_GROUP_ID
+                pom.artifactId = project.name
+                pom.version = PUBLISH_VERSION
+
+                pom.project {
+                    name 'AndroidToolkit'
+                    packaging 'aar' // 我这里发布的是安卓的包，所有写的aar
+                    // optionally artifactId can be defined here
+                    description 'Ad aggregation platform'
+                    url 'https://github.com/LuckyYangChen/AndroidToolkit'
+
+                    scm {
+                        connection 'scm:git:github.com/LuckyYangChen/AndroidToolkit.git'
+                        developerConnection 'scm:git:ssh://github.com/LuckyYangChen/AndroidToolkit.git'
+                        url 'https://github.com/LuckyYangChen/AndroidToolkit/tree/main'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'WeiLianYang'
+                            name 'WeiLian'
+                            email 'williamyangc@163.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
