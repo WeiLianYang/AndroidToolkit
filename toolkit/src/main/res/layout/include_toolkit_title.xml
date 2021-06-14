@@ -13,30 +13,34 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="50dp" />
 
-    <TextView
-        android:id="@+id/tv_previous"
-        style="@style/tool_sp16"
+    <ImageView
+        android:id="@+id/iv_previous"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:padding="15dp"
-        android:text="@string/tool_title_previous"
-        android:textColor="@color/tool_color_646464"
+        android:src="@drawable/toolkit_previous"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_toolTitle"
         style="@style/tool_sp20"
+        android:textColor="#333333"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/guide_tool_line"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/tool_title_record_list" />
 
-    <TextView
+    <ImageView
         android:id="@+id/tv_toolRight"
-        style="@style/tool_sp16"
-        android:padding="15dp"
-        android:textColor="@color/tool_color_646464"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:src="@drawable/toolkit_clear"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/tool_title_clear" />
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

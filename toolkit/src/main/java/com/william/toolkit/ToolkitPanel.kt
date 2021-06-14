@@ -92,7 +92,7 @@ object ToolkitPanel {
             windowManager = appContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         }
         displayView =
-            LayoutInflater.from(appContext).inflate(R.layout.floating_tool_entrance, null)
+            LayoutInflater.from(appContext).inflate(R.layout.floating_toolkit, null)
         displayView?.apply {
             setOnTouchListener(FloatingTouchListener())
             setOnClickListener {

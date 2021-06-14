@@ -18,7 +18,7 @@ import java.util.*
  */
 class RecordListAdapter(activity: Activity) : BaseAdapter<ApiRecordBean>(activity) {
 
-    override fun getLayoutResourceId() = R.layout.item_tool_record
+    override fun getLayoutResourceId() = R.layout.item_toolkit_record
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int, bean: ApiRecordBean) {
         var response: JSONObject? = null

@@ -2,6 +2,7 @@ package com.william.toolkit.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -26,11 +27,11 @@ class RecordListActivity : BaseActivity() {
     override var loadingTextResId = R.string.loading_more
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecordListAdapter? = null
-    private var mIsAtBottom: Boolean = false
+//    private var mIsAtBottom: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_record_list)
+        setContentView(R.layout.activity_toolkit_record_list)
 
         initView()
 
@@ -40,10 +41,10 @@ class RecordListActivity : BaseActivity() {
     private fun initView() {
         val mTvTitle = findViewById<TextView>(R.id.tv_toolTitle)
         mTvTitle.setText(R.string.tool_title_record_list)
-        findViewById<View>(R.id.tv_previous).setOnClickListener { onBackPressed() }
-        val mTvRight = findViewById<TextView>(R.id.tv_toolRight)
-        mTvRight.setText(R.string.tool_title_clear)
-        mTvRight.setOnClickListener {
+        findViewById<View>(R.id.iv_previous).setOnClickListener { onBackPressed() }
+        val mIvRight = findViewById<ImageView>(R.id.tv_toolRight)
+        mIvRight.setImageResource(R.drawable.toolkit_clear)
+        mIvRight.setOnClickListener {
             viewModel.clearRecord()
         }
         mRecyclerView = findViewById(R.id.tool_recyclerView)

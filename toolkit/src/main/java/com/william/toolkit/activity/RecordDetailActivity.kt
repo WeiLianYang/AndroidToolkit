@@ -2,6 +2,7 @@ package com.william.toolkit.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import com.william.toolkit.R
@@ -24,7 +25,7 @@ class RecordDetailActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_record_detail)
+        setContentView(R.layout.activity_toolkit_record_detail)
 
         initView()
 
@@ -33,15 +34,15 @@ class RecordDetailActivity : BaseActivity() {
 
     private fun initView() {
         val mTvTitle = findViewById<TextView>(R.id.tv_toolTitle)
-        val mTvRight = findViewById<TextView>(R.id.tv_toolRight)
+        val mIvRight = findViewById<ImageView>(R.id.tv_toolRight)
         mTvContent = findViewById(R.id.tv_toolContent)
 
         mTvTitle.setText(R.string.tool_title_record_detail)
-        mTvRight.setText(R.string.tool_title_record_share)
+        mIvRight.setImageResource(R.drawable.toolkit_share)
 
-        findViewById<View>(R.id.tv_previous).setOnClickListener { onBackPressed() }
+        findViewById<View>(R.id.iv_previous).setOnClickListener { onBackPressed() }
 
-        mTvRight.setOnClickListener {
+        mIvRight.setOnClickListener {
             val text = mTvContent.text.toString().trim { it <= ' ' }
             copyToClipboard(this, text)
             doSystemShare(this, text)

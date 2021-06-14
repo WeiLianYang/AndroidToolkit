@@ -29,7 +29,7 @@ class ToolkitPanelActivity : BaseActivity(), View.OnClickListener {
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tool_panel)
+        setContentView(R.layout.activity_toolkit_panel)
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }

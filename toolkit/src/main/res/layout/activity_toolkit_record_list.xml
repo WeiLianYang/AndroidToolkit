@@ -17,6 +17,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_toolbar"
-        tools:listitem="@layout/item_tool_record" />
+        tools:listitem="@layout/item_toolkit_record" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

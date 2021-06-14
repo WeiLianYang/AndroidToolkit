@@ -34,7 +34,7 @@ abstract class BaseActivity : AppCompatActivity() {
     @SuppressLint("InflateParams")
     private fun createLoadingDialog() {
         mDialog = Dialog(this, R.style.tool_theme_dialog).apply {
-            val view = layoutInflater.inflate(R.layout.dialog_loading, null)
+            val view = layoutInflater.inflate(R.layout.dialog_toolkit_loading, null)
             view.findViewById<TextView>(R.id.tv_loading).text = getString(loadingTextResId)
             setContentView(view)
             setCancelable(true)

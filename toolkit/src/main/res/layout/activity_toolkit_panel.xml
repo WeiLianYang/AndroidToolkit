@@ -39,7 +39,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:spanCount="4"
-        tools:listitem="@layout/item_tool_label" />
+        tools:listitem="@layout/item_toolkit_label" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
