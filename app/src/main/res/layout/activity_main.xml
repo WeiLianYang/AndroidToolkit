@@ -9,7 +9,7 @@
     <Button
         android:id="@+id/button1"
         style="@style/tool_sp16"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="180dp"
         android:padding="20dp"
         android:text="显示工具入口"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,10 +22,21 @@
         style="@style/tool_sp16"
         android:layout_marginTop="50dp"
         android:padding="20dp"
-        android:text="模拟插入数据"
+        android:text="模拟收集单条数据"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button1"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button3"
+        style="@style/tool_sp16"
+        android:layout_marginTop="50dp"
+        android:padding="20dp"
+        android:text="模拟收集列表数据"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
