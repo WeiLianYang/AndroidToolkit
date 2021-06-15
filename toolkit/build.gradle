@@ -85,4 +85,10 @@ dependencies {
 
 }
 
+ext {
+    artifact = 'toolkit'
+    libraryName = 'toolkit'
+    libraryDescription = 'A toolkit for Android developers to debug easily.'
+}
+
 apply from: "../publish.gradle"

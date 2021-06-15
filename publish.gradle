@@ -1,13 +1,51 @@
 // 发布到mavenCentral的配置
 
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        // https://github.com/novoda/bintray-release/issues/71
+        excludes = ['**/*.kt'] // < ---- Exclude all kotlin files from javadoc file.
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        options.encoding = "utf-8"
+        options.charSet = "utf-8"
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+tasks.withType(Javadoc) {
+    options.encoding = "UTF-8"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+// add javadoc/source jar tasks as artifacts
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def PUBLISH_GROUP_ID = 'io.github.LuckyYangChen'
+def PUBLISH_GROUP_ID = publishedGroupId
+def PUBLISH_ARTIFACT_ID = artifact
 def PUBLISH_VERSION = android.defaultConfig.versionName
-
-def ossrhUsername = ""
-def ossrhPassword = ""
 
 afterEvaluate { project ->
 
@@ -31,39 +69,39 @@ afterEvaluate { project ->
                 }
 
                 pom.groupId = PUBLISH_GROUP_ID
-                pom.artifactId = project.name
+                pom.artifactId = PUBLISH_ARTIFACT_ID
                 pom.version = PUBLISH_VERSION
 
                 pom.project {
-                    name 'AndroidToolkit'
-                    packaging 'aar' // 我这里发布的是安卓的包，所有写的aar
+                    packaging 'aar'
+
+                    name libraryName
                     // optionally artifactId can be defined here
-                    description 'Ad aggregation platform'
-                    url 'https://github.com/LuckyYangChen/AndroidToolkit'
+                    description libraryDescription
+                    url siteUrl
 
                     scm {
-                        connection 'scm:git:github.com/LuckyYangChen/AndroidToolkit.git'
-                        developerConnection 'scm:git:ssh://github.com/LuckyYangChen/AndroidToolkit.git'
-                        url 'https://github.com/LuckyYangChen/AndroidToolkit/tree/main'
+                        connection gitUrl
+                        developerConnection gitUrl
+                        url siteUrl
                     }
 
                     licenses {
                         license {
-                            name 'The Apache License, Version 2.0'
-                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            name licenseName
+                            url licenseUrl
                         }
                     }
 
                     developers {
                         developer {
-                            id 'WeiLianYang'
-                            name 'WeiLian'
-                            email 'williamyangc@163.com'
+                            id developerId
+                            name developerName
+                            email developerEmail
                         }
                     }
                 }
             }
         }
     }
-
 }
