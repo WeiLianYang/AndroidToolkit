@@ -29,3 +29,25 @@ fun <T> BaseViewModel.launch(
         }
     }
 }
+
+/**
+ * 调用携程
+ * @param block 执行网络请求任务
+ * @param success 成功回调（在主线程）
+ * @param error 失败回调（在主线程）
+ */
+fun <T> BaseViewModel.request(
+    block: suspend () -> T,
+    success: (T) -> Unit = {},
+    error: (Throwable) -> Unit = {}
+) {
+    viewModelScope.launch {
+        kotlin.runCatching {
+            block()
+        }.onSuccess {
+            success(it)
+        }.onFailure {
+            error(it)
+        }
+    }
+}

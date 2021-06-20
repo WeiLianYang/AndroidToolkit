@@ -85,7 +85,7 @@ dependencies {
 }
 
 ext {
-    artifact = 'toolkit'
+    artifactId = 'toolkit'
     libraryName = 'toolkit'
     libraryDescription = 'A toolkit for Android developers to debug easily.'
 }

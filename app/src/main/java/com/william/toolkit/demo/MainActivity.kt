@@ -1,13 +1,19 @@
-package com.william.toolkit
+package com.william.toolkit.demo
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.william.toolkit.ToolkitPanel
 import com.william.toolkit.bean.ApiRecordBean
+import com.william.toolkit.demo.vm.MainViewModel
 import com.william.toolkit.manager.DataManager
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
 
     private var offset = 0L
 
@@ -20,11 +26,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<View>(R.id.button2).setOnClickListener {
+            viewModel.testApi()
+        }
+
+        findViewById<View>(R.id.button3).setOnClickListener {
             // 收集单条数据
             DataManager.saveRecord(createRecord())
         }
 
-        findViewById<View>(R.id.button3).setOnClickListener {
+        findViewById<View>(R.id.button4).setOnClickListener {
             // 收集多条数据
             val perHour = 60 * 60 * 1000
             val list = arrayListOf<ApiRecordBean>()
@@ -34,6 +44,10 @@ class MainActivity : AppCompatActivity() {
             }
             DataManager.saveRecordList(list)
         }
+
+        viewModel.bannerMsg.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun createRecord(index: Int = 0): ApiRecordBean {

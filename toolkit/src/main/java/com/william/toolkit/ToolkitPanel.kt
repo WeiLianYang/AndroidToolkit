@@ -43,7 +43,7 @@ object ToolkitPanel {
 
     var isDebugMode: Boolean = BuildConfig.DEBUG
 
-    var codeKey = "code"
+    var successCodeKey = "code"
     var successCode: Int = 200
 
     init {
@@ -70,6 +70,7 @@ object ToolkitPanel {
         appContext = context
         isDebugMode = config.debugMode
         successCode = config.successCode
+        successCodeKey = config.successCodeKey
         context.registerActivityLifecycleCallbacks(ActLifeCircleCallback())
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
     }

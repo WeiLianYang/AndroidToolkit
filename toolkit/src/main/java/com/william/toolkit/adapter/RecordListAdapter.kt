@@ -28,7 +28,7 @@ class RecordListAdapter(activity: Activity) : BaseAdapter<ApiRecordBean>(activit
             e.printStackTrace()
         }
         val text = if (response != null) {
-            val code = response.optInt(ToolkitPanel.codeKey)
+            val code = response.optInt(ToolkitPanel.successCodeKey)
             if (code == ToolkitPanel.successCode) {
                 "✅ "
             } else {

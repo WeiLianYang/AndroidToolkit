@@ -10,6 +10,11 @@ import com.william.toolkit.BuildConfig
 class ToolkitConfig(builder: Builder) {
 
     /**
+     * 标识网络请求成功的业务码字段名
+     */
+    var successCodeKey: String = builder.successCodeKey
+
+    /**
      * 标识网络请求成功的业务码
      */
     var successCode: Int = builder.successCode
@@ -20,8 +25,12 @@ class ToolkitConfig(builder: Builder) {
     var debugMode: Boolean = builder.debugMode
 
     class Builder {
+        internal var successCodeKey: String = "code"
         internal var successCode: Int = 200
         internal var debugMode: Boolean = BuildConfig.DEBUG
+
+        fun setSuccessCodeKey(successCodeKey: String) =
+            apply { this.successCodeKey = successCodeKey }
 
         fun setSuccessCode(successCode: Int) = apply { this.successCode = successCode }
 

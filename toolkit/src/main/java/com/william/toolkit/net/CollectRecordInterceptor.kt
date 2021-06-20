@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * date：2021/6/15 07:09
  * description：通用的收集日志数据拦截器
  */
-class CollectLogInterceptor : Interceptor {
+class CollectRecordInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
 
