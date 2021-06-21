@@ -22,11 +22,11 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <TextView
+    <com.william.toolkit.widget.CustomEmojiTextView
         android:id="@+id/tv_tool_icon"
         style="@style/tool_sp14"
-        android:text="✅"
         android:layout_marginTop="1dp"
+        android:text="✅"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />

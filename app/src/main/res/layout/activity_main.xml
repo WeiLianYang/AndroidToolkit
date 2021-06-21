@@ -28,7 +28,7 @@
         <Button
             android:id="@+id/button1"
             style="@style/tool_sp16"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="100dp"
             android:padding="20dp"
             android:text="显示工具入口"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/button2"
             style="@style/tool_sp16"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:padding="20dp"
             android:text="收集网络接口数据"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -50,7 +50,7 @@
         <Button
             android:id="@+id/button3"
             style="@style/tool_sp16"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:padding="20dp"
             android:text="模拟收集单条数据"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +61,7 @@
         <Button
             android:id="@+id/button4"
             style="@style/tool_sp16"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:padding="20dp"
             android:text="模拟收集列表数据"
             app:layout_constraintLeft_toLeftOf="parent"

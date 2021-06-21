@@ -16,7 +16,6 @@
 
 package com.william.toolkit.demo.service
 
-import android.os.Build
 import com.william.toolkit.BuildConfig
 import com.william.toolkit.net.CollectRecordInterceptor
 import okhttp3.OkHttpClient
@@ -52,11 +51,10 @@ private fun getOkHttpClient(): OkHttpClient {
 
     builder.run {
         addInterceptor(httpLoggingInterceptor)
-
         addInterceptor(HeaderInterceptor())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            addInterceptor(CollectRecordInterceptor()) // Add the interceptor defined in the package
-        }
+
+        // Add the interceptor defined in the package
+        addInterceptor(CollectRecordInterceptor())
 
         connectTimeout(TIMEOUT, TimeUnit.SECONDS)
         readTimeout(TIMEOUT, TimeUnit.SECONDS)

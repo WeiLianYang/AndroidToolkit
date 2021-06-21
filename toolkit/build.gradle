@@ -26,7 +26,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 18
         targetSdkVersion 30
         versionCode 1
         versionName "1.0.0"
@@ -95,8 +95,14 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
 
-    // okhttp
-    compileOnly 'com.squareup.okhttp3:okhttp:4.9.1'
+    // okhttp 兼容5.0以下
+//    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+
+    // emoji
+    implementation "androidx.emoji:emoji:1.1.0"
+    implementation "androidx.emoji:emoji-appcompat:1.1.0"
+    implementation "androidx.emoji:emoji-bundled:1.1.0"
 
 }
 

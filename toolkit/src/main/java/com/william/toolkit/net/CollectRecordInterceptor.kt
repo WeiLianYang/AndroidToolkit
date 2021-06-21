@@ -42,18 +42,22 @@ class CollectRecordInterceptor : Interceptor {
 
         val request = chain.request()
 
+        val startNanoTime = System.nanoTime()
+
         val response = chain.proceed(request)
 
-        collectApiRecordData(request, response)
+        val duration = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNanoTime)
+
+        collectApiRecordData(request, response, duration)
 
         return response
     }
 
     @Throws(IOException::class)
-    private fun collectApiRecordData(request: Request, response: Response) {
+    private fun collectApiRecordData(request: Request, response: Response, duration: Long) {
         if (ToolkitPanel.isDebugMode) {
             val utf8 = StandardCharsets.UTF_8
-            val requestBody = request.body
+            val requestBody = request.body()
             var requestBodyString: String? = null
             requestBody?.let {
                 val buffer = Buffer()
@@ -63,28 +67,29 @@ class CollectRecordInterceptor : Interceptor {
                 charset = contentType?.charset(utf8)
                 requestBodyString = charset?.let { charsetSelf -> buffer.readString(charsetSelf) }
             }
-            val startNanoTime = System.nanoTime()
+
             val requestTime = System.currentTimeMillis()
-            val duration = TimeUnit.NANOSECONDS.toMillis(System.currentTimeMillis() - startNanoTime)
-            val responseBody = response.body
+            val responseBody = response.body()
             responseBody?.let {
                 val source = it.source()
                 source.request(Long.MAX_VALUE)
-                val responseBodyString = source.buffer.clone().readString(utf8)
-                val headers = request.headers
+                val responseBodyString = source.buffer().clone().readString(utf8)
+                val headers = request.headers()
                 val headerJson = JSONObject()
-                val iterator = headers.iterator()
+                val iterator = headers.names().iterator()
                 while (iterator.hasNext()) {
-                    val (first, second) = iterator.next()
+                    val name = iterator.next()
+                    val values = headers.values(name)
+                    val value = if (values.size == 1) values.first() else values.toString()
                     try {
-                        headerJson.put(first, second)
+                        headerJson.put(name, value)
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
                 }
                 val bean = ApiRecordBean(
-                    url = request.url.toString(),
-                    method = request.method,
+                    url = request.url().toString(),
+                    method = request.method(),
                     headers = headerJson.toString(),
                     request = requestBodyString,
                     response = responseBodyString,

@@ -36,6 +36,7 @@ import com.william.toolkit.fragment.PermissionFragment
 import com.william.toolkit.listener.ActLifeCircleCallback
 import com.william.toolkit.listener.ApplicationObserver
 import com.william.toolkit.manager.ActStackManager
+import com.william.toolkit.util.EmojiConfigHelper
 
 /**
  * @author William
@@ -89,6 +90,7 @@ object ToolkitPanel {
         successCodeKey = config.successCodeKey
         context.registerActivityLifecycleCallbacks(ActLifeCircleCallback())
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
+        EmojiConfigHelper.initEmojiCompat()
     }
 
     @SuppressLint("InflateParams")

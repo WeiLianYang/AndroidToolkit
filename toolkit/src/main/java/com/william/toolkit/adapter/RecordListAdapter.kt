@@ -44,14 +44,14 @@ class RecordListAdapter(activity: Activity) : BaseAdapter<ApiRecordBean>(activit
             e.printStackTrace()
         }
         val text = if (response != null) {
-            val code = response.optInt(ToolkitPanel.successCodeKey)
+            val code = response.optInt(ToolkitPanel.successCodeKey, -1)
             if (code == ToolkitPanel.successCode) {
-                "✅ "
+                "\u2705 " // ✅
             } else {
-                "❌ "
+                "\u274C "// ❌
             }
         } else {
-            "❌ "
+            "\u274C "// ❌
         }
         holder.setText(R.id.tv_tool_icon, text)
         holder.setText(R.id.tv_tool_url, bean.url)
