@@ -21,7 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 # * 混淆日志生成目录:app.build.outputs.mapping下,打包时请拷贝此日志,用于错误日志还原分析.
-#--------------------------------------------- 公共配置 ----------------------------------------#
+#--------------------------------------------- 公共配置 start ----------------------------------------#
 -optimizationpasses 5 # 代码混淆压缩比
 -dontusemixedcaseclassnames   # 混合时不使用大小写混合，混合后的类名为小写
 -dontskipnonpubliclibraryclasses #  指定不去忽略非公共的库类。
@@ -34,57 +34,10 @@
 -keepattributes *Annotation*,InnerClasses #保留注解不混淆
 -keepattributes Signature # 避免混淆泛型
 -keepattributes SourceFile,LineNumberTable# 抛出异常时保留代码行号
-#--------------------------------------------- 公共配置 End ----------------------------------------#
+#--------------------------------------------- 公共配置 end ----------------------------------------#
 
-#kotlin
--keep class kotlin.** { *; }
--keep class kotlin.Metadata { *; }
--dontwarn kotlin.**
--keepclassmembers class **$WhenMappings {
-    <fields>;
-}
--keepclassmembers class kotlin.Metadata {
-    public <methods>;
-}
--assumenosideeffects class kotlin.jvm.internal.Intrinsics {
-    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
-}
 
-#--------------------------------------------- Java ----------------------------------------#
-# 保留本地native方法不被混淆
--keepclasseswithmembernames class * {
-    native <methods>;
-}
-
-# 保留枚举类不被混淆
--keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
-}
-
-# 保留JsonObject不被混淆
--keepclassmembers class * {
-   public <init> (org.json.JSONObject);
-}
-
-# 保留Parcelable序列化类不被混淆
--keep class * implements android.os.Parcelable {
-  public static final android.os.Parcelable$Creator *;
-}
-
-# 保留Serializable序列化的类不被混淆
--keep class * implements java.io.Serializable { *; }
--keepclassmembers class * implements java.io.Serializable {
-    static final long serialVersionUID;
-    private static final java.io.ObjectStreamField[] serialPersistentFields;
-    private void writeObject(java.io.ObjectOutputStream);
-    private void readObject(java.io.ObjectInputStream);
-    java.lang.Object writeReplace();
-    java.lang.Object readResolve();
-}
-#--------------------------------------------- Java End ----------------------------------------#
-
-#--------------------------------------------- Android 系统 ----------------------------------------#
+#--------------------------------------------- Android 系统 start ----------------------------------------#
 -keep class android.net.*
 -keep public class * extends android.view.View
 -keep public class * extends android.app.Fragment
@@ -141,7 +94,64 @@
     @androidx.annotation.Keep <init>(...);
 }
 
-# androidx的混淆规则
+#--------------------------------------------- Android 系统 end ----------------------------------------#
+
+
+#--------------------------------------------- Java start ----------------------------------------#
+# 保留本地native方法不被混淆
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# 保留枚举类不被混淆
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+# 保留JsonObject不被混淆
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+# 保留Parcelable序列化类不被混淆
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+# 保留Serializable序列化的类不被混淆
+-keep class * implements java.io.Serializable { *; }
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+#--------------------------------------------- Java End ----------------------------------------#
+
+
+#--------------------------------------------- Kotlin start ----------------------------------------#
+# Kotlin
+-keep class kotlin.** { *; }
+-keep class kotlin.Metadata { *; }
+-dontwarn kotlin.**
+-keepclassmembers class **$WhenMappings {
+    <fields>;
+}
+-keepclassmembers class kotlin.Metadata {
+    public <methods>;
+}
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+}
+#--------------------------------------------- Kotlin end ----------------------------------------#
+
+
+#--------------------------------------------- 第三方依赖 start ----------------------------------------#
+
+# androidx
 -keep class com.google.android.material.** {*;}
 -keep class androidx.** {*;}
 -keep public class * extends androidx.**
@@ -149,11 +159,6 @@
 -dontwarn com.google.android.material.**
 -dontnote com.google.android.material.**
 -dontwarn androidx.**
-
-#--------------------------------------------- Android 系统 End ----------------------------------------#
-
-
-#--------------------------------------------- 第三方依赖 start ----------------------------------------#
 
 #--------------------------------------------- 第三方依赖 end ----------------------------------------#
 
