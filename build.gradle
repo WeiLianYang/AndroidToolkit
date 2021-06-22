@@ -22,6 +22,10 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+
+//        maven {
+//            url 'https://s01.oss.sonatype.org/content/groups/staging'
+//        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.2.1'
@@ -37,6 +41,10 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+
+//        maven {
+//            url 'https://s01.oss.sonatype.org/content/groups/staging'
+//        }
     }
 }
 
