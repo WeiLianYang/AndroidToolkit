@@ -38,7 +38,8 @@ data class ApiRecordBean(
     var request: String? = null,
     var response: String? = null,
     var requestTime: Long = 0,
-    var duration: Long = 0
+    var duration: Long = 0,
+    var httpCode: Int = 0
 ) : Parcelable {
 
     @IgnoredOnParcel
@@ -50,13 +51,15 @@ data class ApiRecordBean(
 
 ${TITLE_ARRAY[1]} : ${duration}ms
 
-${TITLE_ARRAY[2]} : $method
+${TITLE_ARRAY[2]} : $httpCode
 
-${TITLE_ARRAY[3]} : ${format(headers)}
+${TITLE_ARRAY[3]} : $method
 
-${TITLE_ARRAY[4]} : ${format(request)}
+${TITLE_ARRAY[4]} : ${format(headers)}
 
-${TITLE_ARRAY[5]} : ${format(response)}
+${TITLE_ARRAY[5]} : ${format(request)}
+
+${TITLE_ARRAY[6]} : ${format(response)}
 
 """
     }
@@ -65,7 +68,15 @@ ${TITLE_ARRAY[5]} : ${format(response)}
 
         @JvmField
         val TITLE_ARRAY =
-            arrayOf("URL", "Duration", "Method", "Headers", "RequestBody", "ResponseBody")
+            arrayOf(
+                "URL",
+                "Duration",
+                "HttpCode",
+                "Method",
+                "Headers",
+                "RequestBody",
+                "ResponseBody"
+            )
 
     }
 }

@@ -29,16 +29,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
         // set config data
-        val config = ToolkitConfig.Builder()
-            .setDebugMode(BuildConfig.DEBUG)
-            .setSuccessCode(0) // define the success code
-            .setSuccessCodeKey("errorCode") // define the success code key name
-//            .setSuccessCodeKey("code")
-            .build()
+        val config = ToolkitConfig.Builder().setDebugMode(BuildConfig.DEBUG).build()
         // init toolkit
         ToolkitPanel.init(this, config)
     }
-
 }

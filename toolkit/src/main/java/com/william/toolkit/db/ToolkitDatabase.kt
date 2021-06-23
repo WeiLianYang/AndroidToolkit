@@ -20,14 +20,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.william.toolkit.bean.ApiRecordBean
+
 
 /**
  * author：William
  * date：2021/6/13 16:09
  * description：数据库
  */
-@Database(version = 1, entities = [ApiRecordBean::class])
+@Database(version = 2, entities = [ApiRecordBean::class])
 abstract class ToolkitDatabase : RoomDatabase() {
 
     abstract fun getRecordDao(): RecordDao
@@ -49,7 +52,16 @@ abstract class ToolkitDatabase : RoomDatabase() {
             )
                 .fallbackToDestructiveMigration()
                 .enableMultiInstanceInvalidation()
+                .addMigrations(MIGRATION_1_2)
                 .build()
+
+        private val MIGRATION_1_2: Migration = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL(
+                    "ALTER TABLE ApiRecordBean ADD COLUMN httpCode INTEGER NOT NULL DEFAULT 0"
+                )
+            }
+        }
     }
 
 }

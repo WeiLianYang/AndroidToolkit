@@ -17,7 +17,7 @@
 package com.william.toolkit.demo.service
 
 import com.william.toolkit.BuildConfig
-import com.william.toolkit.net.CollectRecordInterceptor
+import com.william.toolkit.net.ApiRecordInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -54,7 +54,7 @@ private fun getOkHttpClient(): OkHttpClient {
         addInterceptor(HeaderInterceptor())
 
         // Add the interceptor defined in the package
-        addInterceptor(CollectRecordInterceptor())
+        addInterceptor(ApiRecordInterceptor())
 
         connectTimeout(TIMEOUT, TimeUnit.SECONDS)
         readTimeout(TIMEOUT, TimeUnit.SECONDS)

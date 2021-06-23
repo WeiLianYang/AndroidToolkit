@@ -18,12 +18,9 @@ package com.william.toolkit.adapter
 
 import android.app.Activity
 import com.william.toolkit.R
-import com.william.toolkit.ToolkitPanel
 import com.william.toolkit.base.BaseAdapter
 import com.william.toolkit.base.BaseViewHolder
 import com.william.toolkit.bean.ApiRecordBean
-import org.json.JSONException
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,24 +34,14 @@ class RecordListAdapter(activity: Activity) : BaseAdapter<ApiRecordBean>(activit
     override fun getLayoutResourceId() = R.layout.item_toolkit_record
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int, bean: ApiRecordBean) {
-        var response: JSONObject? = null
-        try {
-            response = JSONObject(bean.response ?: "")
-        } catch (e: JSONException) {
-            e.printStackTrace()
-        }
-        val text = if (response != null) {
-            val code = response.optInt(ToolkitPanel.successCodeKey, -1)
-            if (code == ToolkitPanel.successCode) {
-                "\u2705 " // ✅
-            } else {
-                "\u274C "// ❌
-            }
+        val text = if (bean.httpCode in 200..299) {
+            "\u2705 " // ✅
         } else {
             "\u274C "// ❌
         }
         holder.setText(R.id.tv_tool_icon, text)
-        holder.setText(R.id.tv_tool_url, bean.url)
+            .setText(R.id.tv_tool_url, bean.url)
+
         val time = SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss",
             Locale.getDefault()

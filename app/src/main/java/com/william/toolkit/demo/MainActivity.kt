@@ -86,7 +86,8 @@ class MainActivity : AppCompatActivity() {
             request = "{\"param1\": \"first param\",\"param2\": \"second param\"}",
             response = "{\"code\": $code, \"success\": $success, \"msg\": \"$msg\"}",
             requestTime = System.currentTimeMillis() + offset,
-            duration = Random.nextLong(200)
+            duration = Random.nextLong(200),
+            httpCode = code
         )
     }
 }

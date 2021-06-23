@@ -60,9 +60,6 @@ object ToolkitPanel {
 
     var isDebugMode: Boolean = BuildConfig.DEBUG
 
-    var successCodeKey = "code"
-    var successCode: Int = 200
-
     init {
         windowParams = WindowManager.LayoutParams().apply {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -86,8 +83,6 @@ object ToolkitPanel {
     fun init(context: Application, config: ToolkitConfig) {
         appContext = context
         isDebugMode = config.debugMode
-        successCode = config.successCode
-        successCodeKey = config.successCodeKey
         context.registerActivityLifecycleCallbacks(ActLifeCircleCallback())
         ProcessLifecycleOwner.get().lifecycle.addObserver(ApplicationObserver())
         EmojiConfigHelper.initEmojiCompat()
