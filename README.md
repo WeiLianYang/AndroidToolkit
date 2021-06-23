@@ -7,19 +7,10 @@
 - Of course, you can also share the data to the people you want to share through other apps
 
 <br>
-    <figure class="third">
-        <img src="screen/permission.png" width="30%">
-        <img src="screen/demo.png" width="30%">
-        <img src="screen/panel.png" width="30%">
-    </figure>
+<img src="screen/top.png">
 <br>
-    <figure class="third">
-        <img src="screen/list.png" width="30%">
-        <img src="screen/detail.png" width="30%">
-        <img src="screen/share.png" width="30%">
-    </figure>
+<img src="screen/bottom.png">
 <br>
-
 
 ## step 1 : update root project build.gradle
 ```groovy
