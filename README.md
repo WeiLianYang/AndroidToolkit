@@ -1,4 +1,4 @@
-# AndroidToolkit
+# AndroidToolkit [中文](https://blog.csdn.net/java_android_man/article/details/118173452)
 
 
 - This is a tool that can help Android development engineers and test engineers view network interface logs more conveniently. 
@@ -7,9 +7,13 @@
 - Of course, you can also share the data to the people you want to share through other apps
 
 <br>
-<img src="screen/top.png">
+
+<img src="https://img-blog.csdnimg.cn/20210624071801865.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2phdmFfYW5kcm9pZF9tYW4=,size_16,color_FFFFFF,t_70#pic_center">
+
 <br>
-<img src="screen/bottom.png">
+
+<img src="https://img-blog.csdnimg.cn/20210624071855607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2phdmFfYW5kcm9pZF9tYW4=,size_16,color_FFFFFF,t_70#pic_center">
+
 <br>
 
 ## step 1 : update root project build.gradle
