@@ -93,6 +93,14 @@ fun saveRecord() {
 }
 ```
 
+
+## Function plan list
+- [ ] Show Crash log list and details.
+- [ ] Display General information of view.
+- [ ] Display App related performance.
+- [ ] Other painful scenes in development.
+
+
 ## Reporting Issues 
 * When you find that the component is not working properly, please create an [issue](https://github.com/WeiLianYang/AndroidToolkit/issues) and I will reply in time.
 
