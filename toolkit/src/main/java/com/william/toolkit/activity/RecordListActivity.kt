@@ -40,7 +40,7 @@ class RecordListActivity : BaseActivity() {
 
     private val viewModel: RecordListViewModel by viewModels()
 
-    override var loadingTextResId = R.string.loading_more
+    override var loadingTextResId = R.string.loading
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecordListAdapter? = null
 //    private var mIsAtBottom: Boolean = false

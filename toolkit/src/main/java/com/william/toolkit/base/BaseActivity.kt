@@ -17,6 +17,7 @@
 package com.william.toolkit.base
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.TextView
@@ -49,12 +50,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
     @SuppressLint("InflateParams")
     private fun createLoadingDialog() {
-        mDialog = Dialog(this, R.style.tool_theme_dialog).apply {
+        AlertDialog.Builder(this, R.style.tool_theme_dialog).apply {
             val view = layoutInflater.inflate(R.layout.dialog_toolkit_loading, null)
             view.findViewById<TextView>(R.id.tv_loading).text = getString(loadingTextResId)
-            setContentView(view)
+            setView(view)
             setCancelable(true)
-            setCanceledOnTouchOutside(false)
+            setFinishOnTouchOutside(false)
+            mDialog = create()
         }
     }
 
