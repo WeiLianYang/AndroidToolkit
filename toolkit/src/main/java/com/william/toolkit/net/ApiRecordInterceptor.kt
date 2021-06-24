@@ -43,22 +43,31 @@ class ApiRecordInterceptor : Interceptor {
 
         val startNanoTime = System.nanoTime()
         val requestTime = System.currentTimeMillis()
+        var duration: Long = 0
+        var response: Response? = null
 
-        val response = chain.proceed(request)
+        kotlin.runCatching {
+            response = chain.proceed(request)
 
-        val duration = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNanoTime)
+            duration = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNanoTime)
 
-        collectApiRecordData(request, response, requestTime, duration)
-
-        return response
+            response!!
+        }.onSuccess {
+            collectApiRecordData(request, it, requestTime, duration)
+        }.onFailure {
+            collectApiRecordData(request, null, requestTime, duration, it.message)
+            throw it
+        }
+        return response!!
     }
 
     @Throws(IOException::class)
     private fun collectApiRecordData(
         request: Request,
-        response: Response,
+        response: Response?,
         requestTime: Long,
-        duration: Long
+        duration: Long,
+        errorMsg: String? = null
     ) {
         if (ToolkitPanel.isDebugMode) {
             val utf8 = Charset.forName("UTF-8")
@@ -72,7 +81,7 @@ class ApiRecordInterceptor : Interceptor {
             }
 
             var responseBody: String? = null
-            response.body()?.let {
+            response?.body()?.let {
                 val source = it.source()
                 source.request(Long.MAX_VALUE)
                 responseBody = source.buffer().clone().readString(utf8)
@@ -99,7 +108,8 @@ class ApiRecordInterceptor : Interceptor {
                 response = responseBody,
                 requestTime = requestTime,
                 duration = duration,
-                httpCode = response.code()
+                httpCode = response?.code() ?: -1,
+                errorMsg = errorMsg
             )
             DataManager.saveRecord(bean)
         }

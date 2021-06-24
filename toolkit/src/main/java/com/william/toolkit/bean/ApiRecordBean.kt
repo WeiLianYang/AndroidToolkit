@@ -37,6 +37,7 @@ data class ApiRecordBean(
     var headers: String? = null,
     var request: String? = null,
     var response: String? = null,
+    var errorMsg: String? = null,
     var requestTime: Long = 0,
     var duration: Long = 0,
     var httpCode: Int = 0
@@ -61,6 +62,7 @@ ${TITLE_ARRAY[5]} : ${format(request)}
 
 ${TITLE_ARRAY[6]} : ${format(response)}
 
+${TITLE_ARRAY[7]} : $errorMsg
 """
     }
 
@@ -75,7 +77,8 @@ ${TITLE_ARRAY[6]} : ${format(response)}
                 "Method",
                 "Headers",
                 "RequestBody",
-                "ResponseBody"
+                "ResponseBody",
+                "ErrorMessage"
             )
 
     }

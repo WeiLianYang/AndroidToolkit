@@ -30,7 +30,7 @@ import com.william.toolkit.bean.ApiRecordBean
  * date：2021/6/13 16:09
  * description：数据库
  */
-@Database(version = 2, entities = [ApiRecordBean::class])
+@Database(version = 3, entities = [ApiRecordBean::class])
 abstract class ToolkitDatabase : RoomDatabase() {
 
     abstract fun getRecordDao(): RecordDao
@@ -52,14 +52,25 @@ abstract class ToolkitDatabase : RoomDatabase() {
             )
                 .fallbackToDestructiveMigration()
                 .enableMultiInstanceInvalidation()
-                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3)
                 .build()
 
-        private val MIGRATION_1_2: Migration = object : Migration(2, 3) {
+        private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
-                    "ALTER TABLE ApiRecordBean ADD COLUMN httpCode INTEGER NOT NULL DEFAULT 0"
-                )
+                database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN httpCode INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
+        private val MIGRATION_2_3: Migration = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN errorMsg TEXT")
+            }
+        }
+
+        private val MIGRATION_1_3: Migration = object : Migration(1, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN httpCode INTEGER NOT NULL DEFAULT 0")
+                database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN errorMsg TEXT")
             }
         }
     }
