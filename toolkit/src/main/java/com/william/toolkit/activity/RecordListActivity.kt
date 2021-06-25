@@ -43,6 +43,7 @@ class RecordListActivity : BaseActivity() {
     override var loadingTextResId = R.string.loading
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecordListAdapter? = null
+    private var mEmptyView: View? = null
 //    private var mIsAtBottom: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +65,7 @@ class RecordListActivity : BaseActivity() {
             viewModel.clearRecord()
         }
         mRecyclerView = findViewById(R.id.tool_recyclerView)
-
+        mEmptyView = findViewById(R.id.tv_noData)
     }
 
     private fun initData() {
@@ -111,6 +112,7 @@ class RecordListActivity : BaseActivity() {
                     clear()
                     notifyDataSetChanged()
                 }
+                mEmptyView?.visibility = View.VISIBLE
             })
 
             recordListData.observe(this@RecordListActivity, {
@@ -119,6 +121,7 @@ class RecordListActivity : BaseActivity() {
                     addAll(it)
                     notifyDataSetChanged()
                 }
+                mEmptyView?.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             })
             mDialog?.show()
             getRecordList()

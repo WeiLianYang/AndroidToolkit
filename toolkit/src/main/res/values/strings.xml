@@ -27,5 +27,6 @@
     <string name="tool_title_record_share">Share</string>
     <string name="loading">Loading, please wait…</string>
     <string name="loading_more">Loading more, please wait…</string>
+    <string name="tool_empty">No data has been collected yet</string>
 
 </resources>

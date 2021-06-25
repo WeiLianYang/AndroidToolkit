@@ -26,15 +26,17 @@
         <activity
             android:name="com.william.toolkit.activity.ToolkitPanelActivity"
             android:launchMode="singleTop"
-            android:theme="@style/tool_theme_activity" />
+            android:theme="@style/tool_theme_panel" />
 
         <activity
             android:name="com.william.toolkit.activity.RecordListActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/tool_theme_activity" />
 
         <activity
             android:name="com.william.toolkit.activity.RecordDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/tool_theme_activity" />
     </application>
 </manifest>

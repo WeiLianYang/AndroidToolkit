@@ -35,4 +35,13 @@
         app:layout_constraintTop_toBottomOf="@+id/cl_toolbar"
         tools:listitem="@layout/item_toolkit_record" />
 
+    <TextView
+        android:id="@+id/tv_noData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tool_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
