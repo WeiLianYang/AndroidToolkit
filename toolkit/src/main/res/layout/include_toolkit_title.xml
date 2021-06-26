@@ -51,7 +51,7 @@
         tools:text="@string/tool_title_record_list" />
 
     <ImageView
-        android:id="@+id/tv_toolRight"
+        android:id="@+id/iv_toolRight"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="10dp"

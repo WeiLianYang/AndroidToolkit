@@ -18,16 +18,14 @@ package com.william.toolkit.activity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.william.toolkit.R
 import com.william.toolkit.adapter.RecordListAdapter
 import com.william.toolkit.base.BaseActivity
 import com.william.toolkit.base.BaseAdapter
 import com.william.toolkit.base.BaseViewHolder
 import com.william.toolkit.bean.ApiRecordBean
+import com.william.toolkit.databinding.ActivityToolkitRecordListBinding
 import com.william.toolkit.util.openActivity
 import com.william.toolkit.vm.RecordListViewModel
 
@@ -40,15 +38,14 @@ class RecordListActivity : BaseActivity() {
 
     private val viewModel: RecordListViewModel by viewModels()
 
+    override val mViewBinding: ActivityToolkitRecordListBinding by bindingView()
+
     override var loadingTextResId = R.string.loading
-    private var mRecyclerView: RecyclerView? = null
+
     private var mAdapter: RecordListAdapter? = null
-    private var mEmptyView: View? = null
-//    private var mIsAtBottom: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_toolkit_record_list)
 
         initView()
 
@@ -56,40 +53,20 @@ class RecordListActivity : BaseActivity() {
     }
 
     private fun initView() {
-        val mTvTitle = findViewById<TextView>(R.id.tv_toolTitle)
-        mTvTitle.setText(R.string.tool_title_record_list)
-        findViewById<View>(R.id.iv_previous).setOnClickListener { onBackPressed() }
-        val mIvRight = findViewById<ImageView>(R.id.tv_toolRight)
-        mIvRight.setImageResource(R.drawable.toolkit_clear)
-        mIvRight.setOnClickListener {
-            viewModel.clearRecord()
+        mViewBinding.includeTitle.apply {
+            ivPrevious.setOnClickListener { onBackPressed() }
+            tvToolTitle.setText(R.string.tool_title_record_list)
+            ivToolRight.setImageResource(R.drawable.toolkit_clear)
+            ivToolRight.setOnClickListener {
+                viewModel.clearRecord()
+            }
         }
-        mRecyclerView = findViewById(R.id.tool_recyclerView)
-        mEmptyView = findViewById(R.id.tv_noData)
     }
 
     private fun initData() {
         mAdapter = RecordListAdapter(this)
-        mRecyclerView?.apply {
+        mViewBinding.recyclerView.apply {
             adapter = mAdapter
-            /*addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-
-                }
-
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    val layoutManager = recyclerView.layoutManager as? LinearLayoutManager
-                    layoutManager?.let {
-                        mIsAtBottom =
-                            it.findLastCompletelyVisibleItemPosition() == (adapter?.itemCount
-                                ?: 0) - 1
-                        if (mIsAtBottom) {
-                            mDialog?.show()
-                            viewModel.getRecordList()
-                        }
-                    }
-                }
-            })*/
         }
         mAdapter?.apply {
             setOnItemClickListener(object :
@@ -112,18 +89,18 @@ class RecordListActivity : BaseActivity() {
                     clear()
                     notifyDataSetChanged()
                 }
-                mEmptyView?.visibility = View.VISIBLE
+                mViewBinding.tvEmptyData.visibility = View.VISIBLE
             })
 
             recordListData.observe(this@RecordListActivity, {
-                mDialog?.dismiss()
+                dismissLoading()
                 mAdapter?.apply {
                     addAll(it)
                     notifyDataSetChanged()
                 }
-                mEmptyView?.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+                mViewBinding.tvEmptyData.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             })
-            mDialog?.show()
+            showLoading()
             getRecordList()
         }
     }

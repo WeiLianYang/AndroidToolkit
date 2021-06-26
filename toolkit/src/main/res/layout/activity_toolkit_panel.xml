@@ -43,11 +43,11 @@
         android:padding="15dp"
         android:text="@string/tool_app_name"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tool_recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tool_recyclerView"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

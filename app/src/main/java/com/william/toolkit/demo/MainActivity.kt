@@ -17,12 +17,12 @@
 package com.william.toolkit.demo
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.william.toolkit.ToolkitPanel
 import com.william.toolkit.bean.ApiRecordBean
+import com.william.toolkit.demo.databinding.ActivityMainBinding
 import com.william.toolkit.demo.vm.MainViewModel
 import com.william.toolkit.manager.DataManager
 import kotlin.random.Random
@@ -30,27 +30,30 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     private var offset = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        findViewById<View>(R.id.button1).setOnClickListener {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.button1.setOnClickListener {
             ToolkitPanel.showFloating(this)
         }
 
-        findViewById<View>(R.id.button2).setOnClickListener {
+        binding.button2.setOnClickListener {
             viewModel.testApi()
         }
 
-        findViewById<View>(R.id.button3).setOnClickListener {
+        binding.button3.setOnClickListener {
             // 收集单条数据
             DataManager.saveRecord(createRecord())
         }
 
-        findViewById<View>(R.id.button4).setOnClickListener {
+        binding.button4.setOnClickListener {
             // 收集多条数据
             val perHour = 60 * 60 * 1000
             val list = arrayListOf<ApiRecordBean>()

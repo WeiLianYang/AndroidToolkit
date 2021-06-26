@@ -21,10 +21,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/include_toolkit_title" />
+    <include
+        android:id="@+id/includeTitle"
+        layout="@layout/include_toolkit_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tool_recyclerView"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
@@ -32,16 +34,19 @@
         android:paddingBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/includeTitle"
         tools:listitem="@layout/item_toolkit_record" />
 
     <TextView
-        android:id="@+id/tv_noData"
+        android:id="@+id/tv_empty_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableTop="@drawable/toolkit_empty_data"
+        android:drawablePadding="15dp"
         android:gravity="center"
         android:text="@string/tool_empty"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseCompatTextViewDrawableXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

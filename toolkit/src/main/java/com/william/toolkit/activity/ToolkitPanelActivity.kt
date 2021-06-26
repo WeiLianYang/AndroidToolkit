@@ -23,13 +23,13 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.william.toolkit.R
 import com.william.toolkit.adapter.ToolkitPanelAdapter
 import com.william.toolkit.base.BaseActivity
 import com.william.toolkit.base.BaseAdapter
 import com.william.toolkit.base.BaseViewHolder
 import com.william.toolkit.bean.ToolkitPanelBean
+import com.william.toolkit.databinding.ActivityToolkitPanelBinding
 import com.william.toolkit.util.openActivity
 import java.util.*
 
@@ -42,18 +42,17 @@ class ToolkitPanelActivity : BaseActivity(), View.OnClickListener {
 
     private var mAdapter: ToolkitPanelAdapter? = null
 
+    override val mViewBinding: ActivityToolkitPanelBinding by bindingView()
+
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_toolkit_panel)
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
-        val mSpaceTop = findViewById<View>(R.id.tool_space_top)
-        mSpaceTop.setOnClickListener(this)
-        val mRecyclerView = findViewById<RecyclerView>(R.id.tool_recyclerView)
+        mViewBinding.toolSpaceTop.setOnClickListener(this)
         mAdapter = ToolkitPanelAdapter(this)
-        mRecyclerView.adapter = mAdapter
+        mViewBinding.recyclerView.adapter = mAdapter
 
         mAdapter?.setOnItemChildClickListener(object :
             BaseAdapter.OnItemChildClickListener<ToolkitPanelBean> {

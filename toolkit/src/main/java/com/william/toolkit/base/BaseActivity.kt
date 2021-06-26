@@ -20,8 +20,10 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import com.william.toolkit.R
 import com.william.toolkit.manager.ActStackManager
 
@@ -32,6 +34,8 @@ import com.william.toolkit.manager.ActStackManager
  */
 abstract class BaseActivity : AppCompatActivity() {
 
+    protected abstract val mViewBinding: ViewBinding
+
     protected var mDialog: Dialog? = null
     protected open var loadingTextResId: Int = R.string.loading
 
@@ -39,11 +43,13 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ActStackManager.addActivity(this)
 
+        setContentView(mViewBinding.root)
+
         createLoadingDialog()
     }
 
     override fun onDestroy() {
-        mDialog?.dismiss()
+        dismissLoading()
         ActStackManager.removeActivity(this)
         super.onDestroy()
     }
@@ -60,4 +66,18 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    protected inline fun <reified T : ViewBinding> bindingView(): Lazy<T> =
+        lazy(LazyThreadSafetyMode.NONE) {
+            val viewBindClass = T::class.java
+            val method = viewBindClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+            return@lazy method.invoke(null, layoutInflater) as T
+        }
+
+    fun showLoading() {
+        mDialog?.show()
+    }
+
+    fun dismissLoading() {
+        mDialog?.dismiss()
+    }
 }
