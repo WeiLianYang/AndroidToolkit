@@ -14,17 +14,29 @@
  * limitations under the License.
  */
 
-package com.william.toolkit.bean
+package com.william.toolkit.vm
+
+import androidx.lifecycle.MutableLiveData
+import com.william.toolkit.base.BaseViewModel
+import com.william.toolkit.ext.launch
+import com.william.toolkit.manager.DataManager
+
 
 /**
- * @author William
- * @date 2020-02-17 18:57
- * Class Comment：
+ * author：William
+ * date：2021/6/27 09:29
+ * description：Crash Detail ViewModel
  */
-class ToolkitPanelBean(var type: Int, var name: String) {
+class CrashDetailViewModel : BaseViewModel() {
 
-    companion object {
-        const val TYPE_RECORD = 0
-        const val TYPE_CRASH = 1
+    val crashData = MutableLiveData<String?>()
+
+    fun handleData() {
+        launch({
+            DataManager.getCrashInfo()
+        }, {
+            crashData.value = it.message
+        })
     }
+
 }

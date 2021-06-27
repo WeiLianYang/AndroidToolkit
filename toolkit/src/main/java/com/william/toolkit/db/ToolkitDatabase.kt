@@ -23,6 +23,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.william.toolkit.bean.ApiRecordBean
+import com.william.toolkit.bean.AppCrashBean
 
 
 /**
@@ -30,10 +31,12 @@ import com.william.toolkit.bean.ApiRecordBean
  * date：2021/6/13 16:09
  * description：数据库
  */
-@Database(version = 3, entities = [ApiRecordBean::class])
+@Database(version = 4, entities = [ApiRecordBean::class, AppCrashBean::class])
 abstract class ToolkitDatabase : RoomDatabase() {
 
     abstract fun getRecordDao(): RecordDao
+
+    abstract fun getCrashDao(): CrashDao
 
     companion object {
 
@@ -50,27 +53,48 @@ abstract class ToolkitDatabase : RoomDatabase() {
                 context.applicationContext,
                 ToolkitDatabase::class.java, "wyc_toolkit.db"
             )
-                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration()// 允许版本升级失败时（未找到版本迁移规则）丢弃所有数据，并重新创建表，否则会抛异常
+                .fallbackToDestructiveMigrationOnDowngrade()// 允许版本降级失败时（未找到版本迁移规则）丢弃所有数据，并重新创建表，否则会抛异常
                 .enableMultiInstanceInvalidation()
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_1_4)
                 .build()
 
+        /**
+         * Migrate from version 1 to version 2
+         */
         private val MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN httpCode INTEGER NOT NULL DEFAULT 0")
             }
         }
 
+        /**
+         * Migrate from version 2 to version 3
+         */
         private val MIGRATION_2_3: Migration = object : Migration(2, 3) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN errorMsg TEXT")
             }
         }
 
-        private val MIGRATION_1_3: Migration = object : Migration(1, 3) {
+        /**
+         * Migrate from version 3 to version 4
+         */
+        private val MIGRATION_3_4: Migration = object : Migration(3, 4) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("CREATE TABLE IF NOT EXISTS `AppCrashBean` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `time` INTEGER NOT NULL, `message` TEXT, `threadName` TEXT)")
+            }
+        }
+
+        /**
+         * Migrate from version 1 to version 4
+         * faster path, ignore middle version
+         */
+        private val MIGRATION_1_4: Migration = object : Migration(1, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN httpCode INTEGER NOT NULL DEFAULT 0")
                 database.execSQL("ALTER TABLE ApiRecordBean ADD COLUMN errorMsg TEXT")
+                database.execSQL("CREATE TABLE IF NOT EXISTS `AppCrashBean` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `time` INTEGER NOT NULL, `message` TEXT, `threadName` TEXT)")
             }
         }
     }

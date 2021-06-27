@@ -19,13 +19,14 @@ package com.william.toolkit.demo
 import android.app.Application
 import com.william.toolkit.ToolkitPanel
 import com.william.toolkit.bean.ToolkitConfig
+import com.william.toolkit.manager.DataManager
 
 /**
  * author：William
  * date：2021/6/14 11:23
  * description：
  */
-class App : Application() {
+class App : Application(), Thread.UncaughtExceptionHandler {
 
     override fun onCreate() {
         super.onCreate()
@@ -33,5 +34,11 @@ class App : Application() {
         val config = ToolkitConfig.Builder().setDebugMode(BuildConfig.DEBUG).build()
         // init toolkit
         ToolkitPanel.init(this, config)
+
+        Thread.setDefaultUncaughtExceptionHandler(this)
+    }
+
+    override fun uncaughtException(t: Thread, e: Throwable) {
+        DataManager.saveCrash(t, e)
     }
 }

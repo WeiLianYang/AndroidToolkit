@@ -16,15 +16,22 @@
 
 package com.william.toolkit.bean
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
 /**
  * @author William
- * @date 2020-02-17 18:57
- * Class Comment：
+ * @date 2021/6/27 09:31
+ * Class Comment：崩溃数据模型
  */
-class ToolkitPanelBean(var type: Int, var name: String) {
+@Entity
+data class AppCrashBean(
 
-    companion object {
-        const val TYPE_RECORD = 0
-        const val TYPE_CRASH = 1
-    }
-}
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0,
+
+    var time: Long = 0,
+    var message: String? = null,
+    var threadName: String? = null
+)

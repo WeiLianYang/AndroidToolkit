@@ -18,6 +18,7 @@ package com.william.toolkit.manager
 
 import com.william.toolkit.ToolkitPanel
 import com.william.toolkit.bean.ApiRecordBean
+import com.william.toolkit.bean.AppCrashBean
 import com.william.toolkit.db.ToolkitDatabase
 import com.william.toolkit.ext.logd
 import com.william.toolkit.ext.logi
@@ -39,6 +40,11 @@ object DataManager {
      * 数据库表[com.william.toolkit.db.RecordDao]操作对象
      */
     private val dao = ToolkitDatabase.getInstance(ToolkitPanel.appContext).getRecordDao()
+
+    /**
+     * 数据库表[com.william.toolkit.db.CrashDao]操作对象
+     */
+    private val crashDao = ToolkitDatabase.getInstance(ToolkitPanel.appContext).getCrashDao()
 
     /**
      * 保存单条记录
@@ -100,6 +106,35 @@ object DataManager {
         val flag = rows > 0
         "record delete rows: $rows".logi()
         return flag
+    }
+
+    /**
+     * 保存崩溃信息
+     */
+    @JvmStatic
+    fun saveCrash(t: Thread?, e: Throwable?) {
+        if (!ToolkitPanel.isDebugMode) {
+            return
+        }
+        if (e == null) {
+            return
+        }
+        val bean = AppCrashBean(
+            time = System.currentTimeMillis(),
+            message = e.stackTrace.contentToString(),
+            threadName = t?.name
+        )
+        thread {
+            crashDao.insert(bean)
+            "crash save success：${bean.threadName}".logi()
+        }
+    }
+
+    /**
+     * 读取崩溃信息
+     */
+    internal fun getCrashInfo(): AppCrashBean {
+        return crashDao.query()
     }
 
 }

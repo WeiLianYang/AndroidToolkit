@@ -38,5 +38,10 @@
             android:name="com.william.toolkit.activity.RecordDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/tool_theme_activity" />
+
+        <activity
+            android:name="com.william.toolkit.activity.CrashDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/tool_theme_activity" />
     </application>
 </manifest>

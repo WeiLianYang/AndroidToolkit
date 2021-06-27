@@ -95,7 +95,7 @@ fun saveRecord() {
 
 
 ## Function plan list
-- [ ] Show Crash log list and details.
+- [x] Show Crash log detail.
 - [ ] Display General information of view.
 - [ ] Display App related performance.
 - [ ] Other painful scenes in development.

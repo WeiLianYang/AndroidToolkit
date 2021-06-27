@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             DataManager.saveRecordList(list)
         }
 
+        binding.button5.setOnClickListener {
+            throw NullPointerException()
+        }
+
         viewModel.bannerMsg.observe(this, {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })

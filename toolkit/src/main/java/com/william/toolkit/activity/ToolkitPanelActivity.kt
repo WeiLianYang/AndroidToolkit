@@ -64,8 +64,10 @@ class ToolkitPanelActivity : BaseActivity(), View.OnClickListener {
             ) {
                 if (bean.type == ToolkitPanelBean.TYPE_RECORD) {
                     openActivity<RecordListActivity>(this@ToolkitPanelActivity)
-                    finish()
+                } else if (bean.type == ToolkitPanelBean.TYPE_CRASH) {
+                    openActivity<CrashDetailActivity>(this@ToolkitPanelActivity)
                 }
+                finish()
             }
         })
 
@@ -73,11 +75,14 @@ class ToolkitPanelActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun createToolsData() {
-        val list: ArrayList<ToolkitPanelBean> = ArrayList()
-        list.add(
+        val list: ArrayList<ToolkitPanelBean> = arrayListOf(
             ToolkitPanelBean(
                 ToolkitPanelBean.TYPE_RECORD,
                 getString(R.string.tool_view_record)
+            ),
+            ToolkitPanelBean(
+                ToolkitPanelBean.TYPE_CRASH,
+                getString(R.string.tool_view_crash)
             )
         )
         mAdapter?.apply {
