@@ -41,10 +41,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.button1.setOnClickListener {
+            // 显示工具入口
             ToolkitPanel.showFloating(this)
         }
 
         binding.button2.setOnClickListener {
+            // 收集网络数据
             viewModel.testApi()
         }
 
@@ -65,10 +67,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.button5.setOnClickListener {
+            // 收集崩溃数据
             throw NullPointerException()
         }
 
         viewModel.bannerMsg.observe(this, {
+            // 监听回调
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
     }
