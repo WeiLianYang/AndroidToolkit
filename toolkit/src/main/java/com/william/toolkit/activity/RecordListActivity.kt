@@ -17,8 +17,8 @@
 package com.william.toolkit.activity
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.william.toolkit.R
 import com.william.toolkit.adapter.RecordListAdapter
 import com.william.toolkit.base.BaseActivity
@@ -89,7 +89,7 @@ class RecordListActivity : BaseActivity() {
                     clear()
                     notifyDataSetChanged()
                 }
-                mViewBinding.tvEmptyData.visibility = View.VISIBLE
+                mViewBinding.tvEmptyData.isVisible = true
             })
 
             recordListData.observe(this@RecordListActivity, {
@@ -98,10 +98,9 @@ class RecordListActivity : BaseActivity() {
                     addAll(it)
                     notifyDataSetChanged()
                 }
-                mViewBinding.tvEmptyData.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
+                mViewBinding.tvEmptyData.isVisible = it.isEmpty()
             })
             showLoading()
-            getRecordList()
         }
     }
 

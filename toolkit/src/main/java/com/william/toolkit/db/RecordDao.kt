@@ -21,6 +21,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.william.toolkit.bean.ApiRecordBean
+import kotlinx.coroutines.flow.Flow
 
 /**
  * author：William
@@ -47,7 +48,7 @@ interface RecordDao {
 //    @Query("select * from ApiRecordBean where id >= (select id from ApiRecordBean limit :offset,1) limit :rows")
     @Query("select * from ApiRecordBean where id > :startId order by requestTime desc limit :rows")
 //    @Query("select * from ApiRecordBean where requestTime > :lastTime limit :rows")
-    fun queryLimitRecord(startId: Long = 0, rows: Int = 10000): List<ApiRecordBean>
+    fun queryLimitRecord(startId: Long = 0, rows: Int = 10000): Flow<List<ApiRecordBean>>
 
     @Query("select count(id) from ApiRecordBean")
     fun queryTotalRecord(): Long

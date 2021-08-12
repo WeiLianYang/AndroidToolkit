@@ -17,8 +17,8 @@
 package com.william.toolkit.vm
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.william.toolkit.base.BaseViewModel
-import com.william.toolkit.bean.ApiRecordBean
 import com.william.toolkit.ext.launch
 import com.william.toolkit.manager.DataManager
 
@@ -32,9 +32,7 @@ class RecordListViewModel : BaseViewModel() {
 
     val clearFlag = MutableLiveData<Boolean>()
 
-    val recordListData = MutableLiveData<List<ApiRecordBean>>()
-
-    var startId: Long = 0
+    val recordListData = DataManager.getRecordList(0).asLiveData()
 
     fun clearRecord() {
         launch({
@@ -44,15 +42,4 @@ class RecordListViewModel : BaseViewModel() {
         })
     }
 
-    fun getRecordList() {
-        launch({
-            DataManager.getRecordList(startId)
-        }, {
-            /*if (it.isNotEmpty()) {
-                startId = it.last().id
-                "最后一行记录的id:$startId".logd()
-            }*/
-            recordListData.value = it
-        })
-    }
 }

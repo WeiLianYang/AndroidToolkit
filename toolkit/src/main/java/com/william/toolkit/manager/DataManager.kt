@@ -23,6 +23,7 @@ import com.william.toolkit.db.ToolkitDatabase
 import com.william.toolkit.ext.logd
 import com.william.toolkit.ext.logi
 import com.william.toolkit.ext.logw
+import kotlinx.coroutines.flow.Flow
 import kotlin.concurrent.thread
 
 
@@ -94,7 +95,7 @@ object DataManager {
     /**
      * 读取数据列表
      */
-    internal fun getRecordList(index: Long): List<ApiRecordBean> {
+    internal fun getRecordList(index: Long): Flow<List<ApiRecordBean>> {
         return dao.queryLimitRecord(index)
     }
 
