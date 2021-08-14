@@ -17,11 +17,12 @@
 package com.william.toolkit.vm
 
 import android.text.SpannableString
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import com.william.toolkit.base.BaseViewModel
 import com.william.toolkit.bean.ApiRecordBean
-import com.william.toolkit.ext.launch
 import com.william.toolkit.util.coloringToJson
+import kotlinx.coroutines.flow.flow
 
 
 /**
@@ -31,14 +32,11 @@ import com.william.toolkit.util.coloringToJson
  */
 class RecordDetailViewModel : BaseViewModel() {
 
-    val recordData = MutableLiveData<SpannableString?>()
-
-    fun handleData(bean: ApiRecordBean?) {
-        launch({
-            if (bean != null) coloringToJson(bean.toString()) else null
-        }, {
-            recordData.value = it
-        })
+    fun getRecordData(bean: ApiRecordBean?): LiveData<SpannableString?> {
+        return flow {
+            val result = if (bean != null) coloringToJson(bean.toString()) else null
+            emit(result)
+        }.asLiveData()
     }
 
 }

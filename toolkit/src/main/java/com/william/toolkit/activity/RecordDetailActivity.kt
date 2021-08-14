@@ -63,12 +63,10 @@ class RecordDetailActivity : BaseActivity() {
 
         showLoading()
         viewModel.apply {
-            recordData.observe(this@RecordDetailActivity, {
+            getRecordData(bean).observe(this@RecordDetailActivity, {
                 dismissLoading()
                 mViewBinding.tvToolContent.text = it
             })
-
-            handleData(bean)
         }
     }
 
