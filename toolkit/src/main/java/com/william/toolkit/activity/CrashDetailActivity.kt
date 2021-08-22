@@ -60,10 +60,10 @@ class CrashDetailActivity : BaseActivity() {
     private fun initData() {
         showLoading()
         viewModel.apply {
-            crashData.observe(this@CrashDetailActivity, {
+            getCrashData().observe(this@CrashDetailActivity, {
                 dismissLoading()
 
-                mViewBinding.tvToolContent.text = getCrashInfo(it)
+                mViewBinding.tvToolContent.text = it
             })
         }
     }
