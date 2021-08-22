@@ -53,7 +53,6 @@ class CrashDetailViewModel : BaseViewModel() {
             val source = "$sb"
 
             val spannableString = SpannableString(source)
-            // 给指定的标题设置 玫红色
             for (title in AppCrashBean.TITLE_ARRAY) {
                 coloringJson(spannableString, source, title, "#ff0000", 0, 0)
             }
