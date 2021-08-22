@@ -64,7 +64,7 @@ fun coloringToJson(jsonStr: String): SpannableString {
  * @param endOffset       匹配到结束的索引偏移量
  */
 @Suppress("SameParameterValue")
-private fun coloringJson(
+fun coloringJson(
     spannableString: SpannableString, jsonStr: String,
     regex: String, colorStr: String, startOffset: Int, endOffset: Int
 ) {

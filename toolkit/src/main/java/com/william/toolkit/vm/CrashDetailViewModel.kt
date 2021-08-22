@@ -16,9 +16,14 @@
 
 package com.william.toolkit.vm
 
+import android.text.SpannableString
 import androidx.lifecycle.asLiveData
 import com.william.toolkit.base.BaseViewModel
+import com.william.toolkit.bean.AppCrashBean
 import com.william.toolkit.manager.DataManager
+import com.william.toolkit.util.coloringJson
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -29,5 +34,26 @@ import com.william.toolkit.manager.DataManager
 class CrashDetailViewModel : BaseViewModel() {
 
     val crashData = DataManager.getCrashInfo().asLiveData()
+
+    fun getCrashInfo(bean: AppCrashBean): SpannableString {
+        val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(bean.time)
+        val sb = StringBuilder()
+            .append("${AppCrashBean.TITLE_ARRAY[0]} : $time")
+            .append("\n").append("\n")
+            .append("${AppCrashBean.TITLE_ARRAY[1]} : ${bean.threadName}")
+            .append("\n").append("\n")
+            .append("${AppCrashBean.TITLE_ARRAY[2]} : ${bean.cause}")
+            .append("\n").append("\n")
+            .append(bean.message)
+
+        val source = "$sb"
+
+        val spannableString = SpannableString(source)
+        // 给指定的标题设置 玫红色
+        for (title in AppCrashBean.TITLE_ARRAY) {
+            coloringJson(spannableString, source, title, "#ff0000", 0, 0)
+        }
+        return spannableString
+    }
 
 }

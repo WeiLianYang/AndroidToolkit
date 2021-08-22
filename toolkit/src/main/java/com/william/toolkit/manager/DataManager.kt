@@ -121,12 +121,12 @@ object DataManager {
         val thread = t ?: Thread.currentThread()
         thread {
             val sb = StringBuilder()
-            sb.append("Caused by : $e").append("\n")
             e.stackTrace.forEach {
-                sb.append("\n").append("at $it")
+                sb.append("${AppCrashBean.TITLE_ARRAY[3]}$it").append("\n")
             }
             val bean = AppCrashBean(
                 time = System.currentTimeMillis(),
+                cause = "$e",
                 message = sb.toString(),
                 threadName = thread?.name
             )

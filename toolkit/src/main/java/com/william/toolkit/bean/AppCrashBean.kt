@@ -32,6 +32,19 @@ data class AppCrashBean(
     var id: Long = 0,
 
     var time: Long = 0,
+    var cause: String? = null,
     var message: String? = null,
     var threadName: String? = null
-)
+) {
+    companion object {
+
+        @JvmField
+        val TITLE_ARRAY =
+            arrayOf(
+                "Crash Time",
+                "Crash thread",
+                "Caused by",
+                "at "
+            )
+    }
+}

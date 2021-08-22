@@ -31,7 +31,7 @@ import com.william.toolkit.bean.AppCrashBean
  * date：2021/6/13 16:09
  * description：数据库
  */
-@Database(version = 4, entities = [ApiRecordBean::class, AppCrashBean::class])
+@Database(version = 5, entities = [ApiRecordBean::class, AppCrashBean::class])
 abstract class ToolkitDatabase : RoomDatabase() {
 
     abstract fun getRecordDao(): RecordDao
@@ -56,7 +56,13 @@ abstract class ToolkitDatabase : RoomDatabase() {
                 .fallbackToDestructiveMigration()// 允许版本升级失败时（未找到版本迁移规则）丢弃所有数据，并重新创建表，否则会抛异常
                 .fallbackToDestructiveMigrationOnDowngrade()// 允许版本降级失败时（未找到版本迁移规则）丢弃所有数据，并重新创建表，否则会抛异常
                 .enableMultiInstanceInvalidation()
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_1_4)
+                .addMigrations(
+                    MIGRATION_1_2,
+                    MIGRATION_2_3,
+                    MIGRATION_3_4,
+                    MIGRATION_4_5,
+                    MIGRATION_1_4
+                )
                 .build()
 
         /**
@@ -83,6 +89,15 @@ abstract class ToolkitDatabase : RoomDatabase() {
         private val MIGRATION_3_4: Migration = object : Migration(3, 4) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL("CREATE TABLE IF NOT EXISTS `AppCrashBean` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `time` INTEGER NOT NULL, `message` TEXT, `threadName` TEXT)")
+            }
+        }
+
+        /**
+         * Migrate from version 4 to version 5
+         */
+        private val MIGRATION_4_5: Migration = object : Migration(4, 5) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE AppCrashBean ADD COLUMN cause TEXT")
             }
         }
 
