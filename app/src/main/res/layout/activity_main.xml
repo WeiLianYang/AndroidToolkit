@@ -74,10 +74,21 @@
             style="@style/tool_sp16"
             android:layout_marginTop="30dp"
             android:padding="20dp"
-            android:text="模拟收集崩溃数据"
+            android:text="模拟收集崩溃数据（会崩溃）"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button4"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/tool_sp16"
+            android:layout_marginTop="30dp"
+            android:padding="20dp"
+            android:text="模拟收集崩溃数据（不会崩溃）"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button5"
             tools:ignore="HardcodedText" />
 
 

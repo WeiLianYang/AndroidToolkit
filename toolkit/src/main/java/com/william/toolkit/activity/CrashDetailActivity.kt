@@ -62,7 +62,8 @@ class CrashDetailActivity : BaseActivity() {
         viewModel.apply {
             crashData.observe(this@CrashDetailActivity, {
                 dismissLoading()
-                mViewBinding.tvToolContent.text = it.message
+                val info = "Crash thread : ${it.threadName}\n\n${it.message}"
+                mViewBinding.tvToolContent.text = info
             })
         }
     }

@@ -71,6 +71,15 @@ class MainActivity : AppCompatActivity() {
             throw NullPointerException()
         }
 
+        binding.button6.setOnClickListener {
+            // 收集崩溃数据，不崩溃
+            try {
+                throw IndexOutOfBoundsException()
+            } catch (e: Exception) {
+                DataManager.saveCrash(e)
+            }
+        }
+
         viewModel.bannerMsg.observe(this, {
             // 监听回调
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()

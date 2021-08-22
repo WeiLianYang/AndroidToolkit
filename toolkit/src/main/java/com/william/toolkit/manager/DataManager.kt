@@ -113,19 +113,23 @@ object DataManager {
      * 保存崩溃信息
      */
     @JvmStatic
-    fun saveCrash(t: Thread?, e: Throwable?) {
+    fun saveCrash(e: Throwable?, t: Thread? = null) {
         if (!ToolkitPanel.isDebugMode) {
             return
         }
-        if (e == null) {
-            return
-        }
-        val bean = AppCrashBean(
-            time = System.currentTimeMillis(),
-            message = e.stackTrace.contentToString(),
-            threadName = t?.name
-        )
+        e ?: return
+        val thread = t ?: Thread.currentThread()
         thread {
+            val sb = StringBuilder()
+            sb.append("Caused by : $e").append("\n")
+            e.stackTrace.forEach {
+                sb.append("\n").append("at $it")
+            }
+            val bean = AppCrashBean(
+                time = System.currentTimeMillis(),
+                message = sb.toString(),
+                threadName = thread?.name
+            )
             crashDao.insert(bean)
             "crash save success：${bean.threadName}".logi()
         }

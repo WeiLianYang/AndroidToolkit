@@ -39,6 +39,6 @@ class App : Application(), Thread.UncaughtExceptionHandler {
     }
 
     override fun uncaughtException(t: Thread, e: Throwable) {
-        DataManager.saveCrash(t, e)
+        DataManager.saveCrash(e, t)
     }
 }
