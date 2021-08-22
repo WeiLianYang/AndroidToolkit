@@ -21,6 +21,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.william.toolkit.bean.AppCrashBean
+import kotlinx.coroutines.flow.Flow
 
 /**
  * author：William
@@ -34,6 +35,6 @@ interface CrashDao {
     fun insert(bean: AppCrashBean): Long
 
     @Query("select * from AppCrashBean order by time desc limit 1")
-    fun query(): AppCrashBean
+    fun query(): Flow<AppCrashBean>
 
 }

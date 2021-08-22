@@ -37,6 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
         android:maxLines="3"
         app:layout_constraintLeft_toRightOf="@+id/tv_tool_icon"
         app:layout_constraintRight_toRightOf="parent"

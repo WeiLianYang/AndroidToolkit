@@ -134,7 +134,7 @@ object DataManager {
     /**
      * 读取崩溃信息
      */
-    internal fun getCrashInfo(): AppCrashBean {
+    internal fun getCrashInfo(): Flow<AppCrashBean> {
         return crashDao.query()
     }
 

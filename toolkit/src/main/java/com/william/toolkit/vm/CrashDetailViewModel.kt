@@ -16,9 +16,8 @@
 
 package com.william.toolkit.vm
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import com.william.toolkit.base.BaseViewModel
-import com.william.toolkit.ext.launch
 import com.william.toolkit.manager.DataManager
 
 
@@ -29,14 +28,6 @@ import com.william.toolkit.manager.DataManager
  */
 class CrashDetailViewModel : BaseViewModel() {
 
-    val crashData = MutableLiveData<String?>()
-
-    fun handleData() {
-        launch({
-            DataManager.getCrashInfo()
-        }, {
-            crashData.value = it.message
-        })
-    }
+    val crashData = DataManager.getCrashInfo().asLiveData()
 
 }
