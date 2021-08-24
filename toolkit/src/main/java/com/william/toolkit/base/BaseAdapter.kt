@@ -146,6 +146,14 @@ abstract class BaseAdapter<T>() : RecyclerView.Adapter<BaseViewHolder>() {
         }
     }
 
+    fun setList(beans: List<T>?) {
+        beans?.let {
+            mList.clear()
+            mList.addAll(it)
+            notifyDataSetChanged()
+        }
+    }
+
     fun remove(position: Int): T? {
         return if (position >= 0 && position < mList.size) {
             mList.removeAt(position)

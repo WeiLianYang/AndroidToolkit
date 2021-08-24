@@ -89,15 +89,11 @@ class RecordListActivity : BaseActivity() {
                     clear()
                     notifyDataSetChanged()
                 }
-                mViewBinding.tvEmptyData.isVisible = true
             })
 
             recordListData.observe(this@RecordListActivity, {
                 dismissLoading()
-                mAdapter?.apply {
-                    addAll(it)
-                    notifyDataSetChanged()
-                }
+                mAdapter?.setList(it)
                 mViewBinding.tvEmptyData.isVisible = it.isEmpty()
             })
             showLoading()
