@@ -42,14 +42,24 @@
         app:layout_constraintLeft_toRightOf="@+id/tv_tool_icon"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="https://developer.android.com/" />
+        tools:text="Url: https://developer.android.com/" />
 
     <TextView
-        android:id="@+id/tv_tool_time"
+        android:id="@+id/tv_tool_id"
         style="@style/tool_sp12"
         android:textColor="@color/tool_color_646464"
         app:layout_constraintLeft_toLeftOf="@+id/tv_tool_url"
         app:layout_constraintTop_toBottomOf="@+id/tv_tool_url"
-        tools:text="12:10:58" />
+        tools:text="Id: 1000000" />
+
+    <TextView
+        android:id="@+id/tv_tool_time"
+        style="@style/tool_sp12"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/tool_color_646464"
+        app:layout_constraintStart_toEndOf="@+id/tv_tool_id"
+        app:layout_constraintTop_toTopOf="@+id/tv_tool_id"
+        tools:text="Time: 2021-08-24 12:10:58" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

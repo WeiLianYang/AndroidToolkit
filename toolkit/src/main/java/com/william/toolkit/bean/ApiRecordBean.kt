@@ -19,6 +19,7 @@ package com.william.toolkit.bean
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.william.toolkit.ext.toDateStr
 import com.william.toolkit.util.format
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -50,19 +51,23 @@ data class ApiRecordBean(
     override fun toString(): String {
         return """${TITLE_ARRAY[0]} : $url
 
-${TITLE_ARRAY[1]} : ${duration}ms
+${TITLE_ARRAY[1]} : $id
 
-${TITLE_ARRAY[2]} : $httpCode
+${TITLE_ARRAY[2]} : ${requestTime.toDateStr()}
 
-${TITLE_ARRAY[3]} : $method
+${TITLE_ARRAY[3]} : ${duration}ms
 
-${TITLE_ARRAY[4]} : ${format(headers)}
+${TITLE_ARRAY[4]} : $httpCode
 
-${TITLE_ARRAY[5]} : ${format(request)}
+${TITLE_ARRAY[5]} : $method
 
-${TITLE_ARRAY[6]} : ${format(response)}
+${TITLE_ARRAY[6]} : ${format(headers)}
 
-${TITLE_ARRAY[7]} : $errorMsg
+${TITLE_ARRAY[7]} : ${format(request)}
+
+${TITLE_ARRAY[8]} : ${format(response)}
+
+${TITLE_ARRAY[9]} : $errorMsg
 """
     }
 
@@ -71,8 +76,10 @@ ${TITLE_ARRAY[7]} : $errorMsg
         @JvmField
         val TITLE_ARRAY =
             arrayOf(
-                "URL",
-                "Duration",
+                "RequestUrl",
+                "RequestId",
+                "RequestTime",
+                "RequestDuration",
                 "HttpCode",
                 "Method",
                 "Headers",

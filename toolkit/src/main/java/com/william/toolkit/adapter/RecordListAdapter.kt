@@ -21,8 +21,7 @@ import com.william.toolkit.R
 import com.william.toolkit.base.BaseAdapter
 import com.william.toolkit.base.BaseViewHolder
 import com.william.toolkit.bean.ApiRecordBean
-import java.text.SimpleDateFormat
-import java.util.*
+import com.william.toolkit.ext.toDateStr
 
 /**
  * @author William
@@ -39,14 +38,11 @@ class RecordListAdapter(activity: Activity) : BaseAdapter<ApiRecordBean>(activit
         } else {
             "\u274C "// ❌
         }
-        holder.setText(R.id.tv_tool_icon, text)
-            .setText(R.id.tv_tool_url, bean.url)
 
-        val time = SimpleDateFormat(
-            "yyyy-MM-dd HH:mm:ss",
-            Locale.getDefault()
-        ).format(Date(bean.requestTime))
-        holder.setText(R.id.tv_tool_time, time)
+        holder.setText(R.id.tv_tool_icon, text)
+            .setText(R.id.tv_tool_id, "Id: ${bean.id}")
+            .setText(R.id.tv_tool_time, "Time: ${bean.requestTime.toDateStr()}")
+            .setText(R.id.tv_tool_url, "Url: ${bean.url}")
     }
 
 }
