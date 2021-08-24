@@ -31,7 +31,7 @@ buildscript {
 ## step 2 : update module's build.gradle
 ```groovy
 dependencies {
-    implementation 'io.github.weilianyang:toolkit:1.0.4'
+    implementation 'io.github.weilianyang:toolkit:1.0.5'
 }
 ```
 
