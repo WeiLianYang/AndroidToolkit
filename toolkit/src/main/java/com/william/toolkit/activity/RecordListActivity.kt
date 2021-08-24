@@ -77,7 +77,7 @@ class RecordListActivity : BaseActivity() {
                     bean: ApiRecordBean?
                 ) {
                     openActivity<RecordDetailActivity>(this@RecordListActivity) {
-                        putExtra("bean", bean)
+                        putExtra("id", bean?.id)
                     }
                 }
             })

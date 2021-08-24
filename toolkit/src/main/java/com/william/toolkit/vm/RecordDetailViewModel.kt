@@ -20,23 +20,32 @@ import android.text.SpannableString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import com.william.toolkit.base.BaseViewModel
-import com.william.toolkit.bean.ApiRecordBean
+import com.william.toolkit.ext.logd
+import com.william.toolkit.ext.loge
+import com.william.toolkit.manager.DataManager
 import com.william.toolkit.util.coloringToJson
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onCompletion
 
 
 /**
  * @author William
  * @date 2021/6/13 18:36
- * Class Comment：
+ * Class Comment：Record Detail ViewModel
  */
 class RecordDetailViewModel : BaseViewModel() {
 
-    fun getRecordData(bean: ApiRecordBean?): LiveData<SpannableString?> {
-        return flow {
+    fun getDetailData(id: Long): LiveData<SpannableString?> {
+        return DataManager.getRecord(id).map { bean ->
             val result = if (bean != null) coloringToJson(bean.toString()) else null
-            emit(result)
-        }.asLiveData()
+            result
+        }.flowOn(Dispatchers.Default)
+            .onCompletion { cause -> "flow complete with $cause".logd() }
+            .catch { ex -> "flow catch exception: $ex".loge() }
+            .asLiveData()
     }
 
 }

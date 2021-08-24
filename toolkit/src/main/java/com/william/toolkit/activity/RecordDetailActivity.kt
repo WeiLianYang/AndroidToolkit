@@ -20,7 +20,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.william.toolkit.R
 import com.william.toolkit.base.BaseActivity
-import com.william.toolkit.bean.ApiRecordBean
 import com.william.toolkit.databinding.ActivityToolkitRecordDetailBinding
 import com.william.toolkit.util.copyToClipboard
 import com.william.toolkit.util.doSystemShare
@@ -59,15 +58,12 @@ class RecordDetailActivity : BaseActivity() {
     }
 
     private fun initData() {
-        val bean: ApiRecordBean? = intent.getParcelableExtra("bean")
-
+        val id: Long = intent.getLongExtra("id", -1)
         showLoading()
-        viewModel.apply {
-            getRecordData(bean).observe(this@RecordDetailActivity, {
-                dismissLoading()
-                mViewBinding.tvToolContent.text = it
-            })
-        }
+        viewModel.getDetailData(id).observe(this, {
+            dismissLoading()
+            mViewBinding.tvToolContent.text = it
+        })
     }
 
 

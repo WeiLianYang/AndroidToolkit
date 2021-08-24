@@ -93,6 +93,13 @@ object DataManager {
     }
 
     /**
+     * 读取日志详情
+     */
+    internal fun getRecord(id: Long): Flow<ApiRecordBean?> {
+        return dao.queryRecordById(id)
+    }
+
+    /**
      * 读取数据列表
      */
     internal fun getRecordList(index: Long): Flow<List<ApiRecordBean>> {
@@ -138,7 +145,7 @@ object DataManager {
     /**
      * 读取崩溃信息
      */
-    internal fun getCrashInfo(): Flow<AppCrashBean> {
+    internal fun getCrashInfo(): Flow<AppCrashBean?> {
         return crashDao.query()
     }
 

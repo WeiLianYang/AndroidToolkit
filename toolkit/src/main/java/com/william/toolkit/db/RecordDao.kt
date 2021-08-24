@@ -40,6 +40,9 @@ interface RecordDao {
     @Query("delete FROM ApiRecordBean where id in (select id from ApiRecordBean limit :offset)")
     fun removeHeadRecord(offset: Int = 20): Int
 
+    @Query("select * from ApiRecordBean where id = :id")
+    fun queryRecordById(id: Long = 0): Flow<ApiRecordBean?>
+
     /**
      * 检索范围 (offset, offset + rows]
      * 检索范围 (startId, rows]

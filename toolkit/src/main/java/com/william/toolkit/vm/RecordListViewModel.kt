@@ -26,7 +26,7 @@ import com.william.toolkit.manager.DataManager
 /**
  * @author William
  * @date 2021/6/13 18:36
- * Class Comment：
+ * Class Comment：Record List ViewModel
  */
 class RecordListViewModel : BaseViewModel() {
 

@@ -35,6 +35,6 @@ interface CrashDao {
     fun insert(bean: AppCrashBean): Long
 
     @Query("select * from AppCrashBean order by time desc limit 1")
-    fun query(): Flow<AppCrashBean>
+    fun query(): Flow<AppCrashBean?>
 
 }

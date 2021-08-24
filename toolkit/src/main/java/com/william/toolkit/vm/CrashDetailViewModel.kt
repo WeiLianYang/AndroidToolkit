@@ -40,15 +40,15 @@ class CrashDetailViewModel : BaseViewModel() {
     fun getCrashData(): LiveData<SpannableString> {
         return crashDataFlow.map { bean ->
             val time =
-                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(bean.time)
+                SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(bean?.time)
             val sb = StringBuilder()
                 .append("${AppCrashBean.TITLE_ARRAY[0]} : $time")
                 .append("\n").append("\n")
-                .append("${AppCrashBean.TITLE_ARRAY[1]} : ${bean.threadName}")
+                .append("${AppCrashBean.TITLE_ARRAY[1]} : ${bean?.threadName}")
                 .append("\n").append("\n")
-                .append("${AppCrashBean.TITLE_ARRAY[2]} : ${bean.cause}")
+                .append("${AppCrashBean.TITLE_ARRAY[2]} : ${bean?.cause}")
                 .append("\n").append("\n")
-                .append(bean.message)
+                .append(bean?.message)
 
             val source = "$sb"
 
